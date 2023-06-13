@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+  db-master:
+    command: --server-id=1 --log-bin=mysql-bin --binlog-format=row
+    image: mysql:debian
+    container_name: db-master
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: pbbs1959
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - 3008:3306
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  
